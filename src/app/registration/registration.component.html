@@ -1,3 +1,39 @@
-<form [formGroup]="registrationForm">
-  <input type="text" formControlName="name" />
-</form>
+<div class="registration">
+  <form [formGroup]="registrationForm" class="registration-form">
+    <input type="text" formControlName="name" placeholder="Felhasználónév" />
+    <input type="email" formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Jelszó" />
+    <input
+      type="password"
+      formControlName="rePassword"
+      placeholder="Jelszó újra"
+    />
+    <div>
+      <span>Felhasználó típusa:</span>
+      <label>
+        <input type="radio" value="Business" formControlName="userType" />
+        <span>üzleti</span>
+      </label>
+      <label>
+        <input type="radio" value="Private" formControlName="userType" />
+        <span>magán</span>
+      </label>
+    </div>
+    <label>
+      <span>Hol halottál rólunk? </span>
+      <select name="ads" id="ads" formControlName="ads" value="empty">
+        <option *ngFor="let ad of AdTypeEnum" [value]="ad">{{ ad }}</option>
+      </select>
+    </label>
+    <input
+      type="text"
+      formControlName="birthDate"
+      placeholder="Születési dátum"
+    />
+    <input
+      type="text"
+      formControlName="rules"
+      placeholder="Felhasználói szabalyzat"
+    />
+  </form>
+</div>
