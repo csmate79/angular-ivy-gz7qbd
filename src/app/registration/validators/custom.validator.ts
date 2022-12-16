@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export class CustomValidators {
   public static passwordMatch(
@@ -21,4 +21,15 @@ export class CustomValidators {
       return null;
     };
   }
+
+  public static ageValidator: ValidatorFn = (date): ValidationErrors => {
+    let today = new Date();
+    if (date.value) {
+      if (today.getFullYear() - date.value.getFullYear() < 18) {
+        return { underEighteen: true };
+      } else {
+        null;
+      }
+    }
+  };
 }

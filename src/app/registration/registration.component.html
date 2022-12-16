@@ -21,7 +21,7 @@
       />
       <mat-error
         *ngIf="this.registrationForm.controls['email'].hasError('email')"
-        >{{ 'Helytelen email formátum' + asd() }}</mat-error
+        >{{ 'Helytelen email formátum' }}</mat-error
       >
     </mat-form-field>
     <mat-form-field>
@@ -77,6 +77,12 @@
         [for]="picker"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error
+        *ngIf="
+          this.registrationForm.controls['birthDate'].hasError('underEighteen')
+        "
+        >{{ 'Nem múltál el 18 éves' }}</mat-error
+      >
     </mat-form-field>
     <section class="example-section">
       <mat-checkbox class="example-margin" formControlName="rules"

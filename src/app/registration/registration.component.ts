@@ -16,7 +16,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log(this.AdTypeEnum);
     this.registrationForm = this.fb.group(
       {
         name: [null, Validators.maxLength(75)],
@@ -32,7 +31,7 @@ export class RegistrationComponent implements OnInit {
         passwordConfirm: [null],
         userType: [null],
         ads: [null],
-        birthDate: [null],
+        birthDate: [null, CustomValidators.ageValidator],
         rules: [null],
       },
       {
@@ -41,9 +40,5 @@ export class RegistrationComponent implements OnInit {
         ],
       }
     );
-  }
-
-  public asd() {
-    console.log(this.registrationForm);
   }
 }
