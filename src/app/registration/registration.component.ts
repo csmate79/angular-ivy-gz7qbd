@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AdType } from './enums/ad.enum';
+import { AdTypeEnums } from './enums/ads.enum';
 
 @Component({
   selector: 'app-registration',
@@ -10,7 +10,7 @@ import { AdType } from './enums/ad.enum';
 export class RegistrationComponent implements OnInit {
   public registrationForm: FormGroup;
 
-  public AdTypeEnum = Object.keys(AdType);
+  public AdTypeEnum = Object.keys(AdTypeEnums);
 
   constructor(private fb: FormBuilder) {}
   ngOnInit() {
