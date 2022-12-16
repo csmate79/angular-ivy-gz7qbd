@@ -21,7 +21,7 @@
       />
       <mat-error
         *ngIf="this.registrationForm.controls['email'].hasError('email')"
-        >{{ 'Helytelen email formátum' }}</mat-error
+        >{{ 'Helytelen email formátum' + asd() }}</mat-error
       >
     </mat-form-field>
     <mat-form-field>
@@ -42,9 +42,15 @@
       <input
         matInput
         type="password"
-        formControlName="rePassword"
+        formControlName="passwordConfirm"
         placeholder="Jelszó újra"
       />
+      <mat-error
+        *ngIf="
+          this.registrationForm.controls['passwordConfirm'].hasError('matching')
+        "
+        >{{ 'Nem egyeznek a jelszavak' }}</mat-error
+      >
     </mat-form-field>
     <label id="example-radio-group-label">Felhasználó típusa:</label>
     <mat-radio-group aria-labelledby="example-radio-group-label">

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdTypeEnums } from './enums/ads.enum';
+import { CustomValidators } from './validators/custom.validator';
 
 @Component({
   selector: 'app-registration',
@@ -16,29 +17,33 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.AdTypeEnum);
-    this.registrationForm = this.fb.group({
-      name: [null, Validators.maxLength(75)],
-      email: [null, Validators.email],
-      password: [
-        null,
-        [
-          Validators.pattern(
-            '(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
-          ),
+    this.registrationForm = this.fb.group(
+      {
+        name: [null, Validators.maxLength(75)],
+        email: [null, Validators.email],
+        password: [
+          null,
+          [
+            Validators.pattern(
+              '(?=.*[A-Z])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
+            ),
+          ],
         ],
-      ],
-      rePassword: [
-        null,
-        [
-          Validators.pattern(
-            '(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
-          ),
+        passwordConfirm: [null],
+        userType: [null],
+        ads: [null],
+        birthDate: [null],
+        rules: [null],
+      },
+      {
+        validators: [
+          CustomValidators.passwordMatch('password', 'passwordConfirm'),
         ],
-      ],
-      userType: [null],
-      ads: [null],
-      birthDate: [null],
-      rules: [null],
-    });
+      }
+    );
+  }
+
+  public asd() {
+    console.log(this.registrationForm);
   }
 }
