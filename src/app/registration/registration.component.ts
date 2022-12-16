@@ -13,6 +13,7 @@ export class RegistrationComponent implements OnInit {
   public AdTypeEnum = Object.keys(AdTypeEnums);
 
   constructor(private fb: FormBuilder) {}
+
   ngOnInit() {
     console.log(this.AdTypeEnum);
     this.registrationForm = this.fb.group({
@@ -41,5 +42,13 @@ export class RegistrationComponent implements OnInit {
       birthDate: [null],
       rules: [null],
     });
+  }
+
+  public getErrorMessage() {
+    if (this.registrationForm.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.registrationForm.hasError('email') ? 'Not a valid email' : '';
   }
 }

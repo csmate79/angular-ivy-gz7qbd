@@ -15,6 +15,9 @@
         formControlName="email"
         placeholder="Email"
       />
+      <mat-error *ngIf="registrationForm.controls['email'].invalid">{{
+        getErrorMessage()
+      }}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input
