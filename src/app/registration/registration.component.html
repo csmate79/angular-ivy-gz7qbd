@@ -7,6 +7,10 @@
         formControlName="name"
         placeholder="Felhasználónév"
       />
+      <mat-error
+        *ngIf="this.registrationForm.controls['name'].hasError('maxlength')"
+        >{{ 'Hosszabb mint 75 karakter' }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -15,9 +19,10 @@
         formControlName="email"
         placeholder="Email"
       />
-      <mat-error *ngIf="registrationForm.controls['email'].invalid">{{
-        getErrorMessage()
-      }}</mat-error>
+      <mat-error
+        *ngIf="this.registrationForm.controls['email'].hasError('email')"
+        >{{ 'Helytelen email formátum' }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -26,6 +31,12 @@
         formControlName="password"
         placeholder="Jelszó"
       />
+      <mat-error
+        *ngIf="this.registrationForm.controls['password'].hasError('pattern')"
+        >{{
+          'Legalább 8 karakter, legalább egy negy betű és egy szimbólum'
+        }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -35,41 +46,36 @@
         placeholder="Jelszó újra"
       />
     </mat-form-field>
-    <div>
-      <span>Felhasználó típusa:</span>
-      <label>
-        <input type="radio" value="Business" formControlName="userType" />
-        <span>üzleti</span>
-      </label>
-      <label>
-        <input type="radio" value="Private" formControlName="userType" />
-        <span>magán</span>
-      </label>
-    </div>
+    <label id="example-radio-group-label">Felhasználó típusa:</label>
+    <mat-radio-group aria-labelledby="example-radio-group-label">
+      <mat-radio-button value="Business">Üzleti</mat-radio-button>
+      <mat-radio-button value="Private">Magán</mat-radio-button>
+    </mat-radio-group>
     <!-- <mat-form-field> </mat-form-field>
     <mat-form-field> </mat-form-field>
     <mat-form-field> </mat-form-field> -->
-    <label>
-      <span>Hol halottál rólunk? </span>
-      <select name="ads" id="ads" formControlName="ads" value="empty">
-        <option *ngFor="let ad of AdTypeEnum" [value]="ad">{{ ad }}</option>
-      </select>
-    </label>
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        formControlName="birthDate"
-        placeholder="Születési dátum"
-      />
+    <mat-form-field appearance="fill">
+      <mat-label>Hol halottál rólunk?</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let ad of AdTypeEnum" [value]="ad">{{
+          ad
+        }}</mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field>
-      <input
-        matInput
-        type="text"
-        formControlName="rules"
-        placeholder="Felhasználói szabalyzat"
-      />
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="birthDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+    <section class="example-section">
+      <mat-checkbox class="example-margin" formControlName="rules"
+        >Felhasználói feltételek</mat-checkbox
+      >
+    </section>
   </form>
 </div>

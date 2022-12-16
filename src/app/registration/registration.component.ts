@@ -18,11 +18,10 @@ export class RegistrationComponent implements OnInit {
     console.log(this.AdTypeEnum);
     this.registrationForm = this.fb.group({
       name: [null, Validators.maxLength(75)],
-      email: [null],
+      email: [null, Validators.email],
       password: [
         null,
         [
-          Validators.required,
           Validators.pattern(
             '(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
           ),
@@ -31,7 +30,6 @@ export class RegistrationComponent implements OnInit {
       rePassword: [
         null,
         [
-          Validators.required,
           Validators.pattern(
             '(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-zd$@$!%*?&].{8,}'
           ),
@@ -42,13 +40,5 @@ export class RegistrationComponent implements OnInit {
       birthDate: [null],
       rules: [null],
     });
-  }
-
-  public getErrorMessage() {
-    if (this.registrationForm.hasError('required')) {
-      return 'You must enter a value';
-    }
-
-    return this.registrationForm.hasError('email') ? 'Not a valid email' : '';
   }
 }
