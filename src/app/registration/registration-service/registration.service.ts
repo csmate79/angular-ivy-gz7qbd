@@ -12,7 +12,9 @@ export class RegistrationService {
   /**
    * Felhasználói adatok lekérése szerkesztésre (admin által)
    */
-  public postEmailValidation(emailAddress: AbstractControl): Observable<any> {
+  public postEmailValidation(
+    emailAddress: AbstractControl<any>
+  ): Observable<any> {
     return this.httpClient.post('backendUrl', emailAddress);
   }
 }

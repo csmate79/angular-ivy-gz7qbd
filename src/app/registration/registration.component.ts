@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdTypeEnums } from './enums/ads.enum';
+import { RegistrationService } from './registration-service/registration.service';
 import { CustomValidators } from './validators/custom.validator';
 
 @Component({
@@ -13,13 +14,22 @@ export class RegistrationComponent implements OnInit {
 
   public AdTypeEnum = Object.keys(AdTypeEnums);
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private registrationService: RegistrationService
+  ) {}
 
   ngOnInit() {
     this.registrationForm = this.fb.group(
       {
         name: [null, Validators.maxLength(75)],
-        email: [null, Validators.email],
+        email: [
+          null,
+          [
+            Validators.email,
+            // CustomValidators.validateEmail(this.registrationService),
+          ],
+        ],
         password: [
           null,
           [
