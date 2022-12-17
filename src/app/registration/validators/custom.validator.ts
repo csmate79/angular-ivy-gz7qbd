@@ -37,6 +37,7 @@ export class CustomValidators {
   public static validateEmail(
     registrationService: RegistrationService
   ): ValidatorFn {
+    //backend kell hozzá
     return (control: AbstractControl): { [key: string]: any } => {
       return registrationService.postEmailValidation(control).subscribe(
         ({ data }) => {
