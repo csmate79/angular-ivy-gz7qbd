@@ -17,17 +17,24 @@ export class RegistrationService {
     return this.httpClient.post('backendUrl/checkemail', emailAddress);
   }
 
-  public postSendEmailToFriend(
-    emailAddress: AbstractControl<any>
-  ): Observable<any> {
-    return this.httpClient.post(
-      'https://formspree.io/f/xjvdbgvy',
-      {
-        name: 'Valaki',
-        replyto: emailAddress.value,
-        message: 'ez egy új email',
-      },
-      { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }
-    );
+  public postSendEmailToFriend(email: string): void {
+    emailjs
+      .send(
+        'service_af1h51s',
+        'template_uoaqmrr',
+        {
+          from_name: 'asd',
+          reply_to: email,
+        },
+        'xGybd5wcyNAlE4PnF'
+      )
+      .then(
+        (result: EmailJSResponseStatus) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
   }
 }

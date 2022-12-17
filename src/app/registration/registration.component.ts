@@ -55,9 +55,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   public sendEmail() {
-    this.registrationService
-      .postSendEmailToFriend(this.registrationForm.get('inviteFriend'))
-      .pipe(tap((res) => console.log(res)))
-      .subscribe();
+    this.registrationService.postSendEmailToFriend(
+      this.registrationForm.get('email').value
+    );
   }
 }
