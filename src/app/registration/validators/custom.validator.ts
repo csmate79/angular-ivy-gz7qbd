@@ -1,6 +1,10 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { RegistrationService } from '../registration-service/registration.service';
 
 export class CustomValidators {
+
+  constructor(private registrationService: RegistrationService) {}
+
   public static passwordMatch(
     controlName: string,
     matchControlName: string
@@ -32,4 +36,23 @@ export class CustomValidators {
       }
     }
   };
+
+  private validateUsername(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      this.registrationService.postEmailValidation(control)
+        .subscribe(
+          ({data}) => {
+            let res: string = data;
+            if (res === control.value) {
+              return {'alreadyExist': true};
+            } else {
+              return null
+            }
+          },
+          (error) => {
+            console.log(error);
+          }
+        )
+    }
+  }
 }
