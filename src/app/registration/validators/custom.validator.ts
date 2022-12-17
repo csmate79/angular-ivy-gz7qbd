@@ -42,7 +42,7 @@ export class CustomValidators {
         ({ data }) => {
           let res: string = data;
           if (res === control.value) {
-            return { alreadyExist: true };
+            return { emailAlreadyExist: true };
           } else {
             return null;
           }

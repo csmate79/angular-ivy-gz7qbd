@@ -23,6 +23,12 @@
         *ngIf="this.registrationForm.controls['email'].hasError('email')"
         >{{ 'Helytelen email formátum' }}</mat-error
       >
+      <mat-error
+        *ngIf="
+          this.registrationForm.controls['email'].hasError('emailAlreadyExist')
+        "
+        >{{ 'A megadott email cím már használatban van' }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field>
       <input
@@ -57,9 +63,6 @@
       <mat-radio-button value="Business">Üzleti</mat-radio-button>
       <mat-radio-button value="Private">Magán</mat-radio-button>
     </mat-radio-group>
-    <!-- <mat-form-field> </mat-form-field>
-    <mat-form-field> </mat-form-field>
-    <mat-form-field> </mat-form-field> -->
     <mat-form-field appearance="fill">
       <mat-label>Hol halottál rólunk?</mat-label>
       <mat-select>
@@ -89,5 +92,25 @@
         >Felhasználói feltételek</mat-checkbox
       >
     </section>
+    <mat-form-field>
+      <input
+        matInput
+        type="email"
+        formControlName="email"
+        placeholder="Barát meghívása email alapján"
+      />
+      <mat-error
+        *ngIf="this.registrationForm.controls['email'].hasError('email')"
+        >{{ 'Helytelen email formátum' }}</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="button"
+      (click)="sendEmail()"
+    >
+      Email küldése
+    </button>
   </form>
 </div>

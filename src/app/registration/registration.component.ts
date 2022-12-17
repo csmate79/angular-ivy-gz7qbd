@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { tap } from 'rxjs';
 import { AdTypeEnums } from './enums/ads.enum';
 import { RegistrationService } from './registration-service/registration.service';
 import { CustomValidators } from './validators/custom.validator';
@@ -27,7 +28,7 @@ export class RegistrationComponent implements OnInit {
           null,
           [
             Validators.email,
-            // CustomValidators.validateEmail(this.registrationService),
+            CustomValidators.validateEmail(this.registrationService),
           ],
         ],
         password: [
@@ -43,6 +44,7 @@ export class RegistrationComponent implements OnInit {
         ads: [null],
         birthDate: [null, CustomValidators.ageValidator],
         rules: [null],
+        inviteFriend: [null, Validators.email],
       },
       {
         validators: [
@@ -50,5 +52,12 @@ export class RegistrationComponent implements OnInit {
         ],
       }
     );
+  }
+
+  public sendEmail() {
+    this.registrationService
+      .postSendEmailToFriend(this.registrationForm.get('inviteFriend'))
+      .pipe(tap((res) => console.log(res)))
+      .subscribe();
   }
 }
